@@ -15,6 +15,7 @@ function WalletInputs({ chain, wallet, setChain, setWallet }) {
             <select onChange={(e) => setChain(e.target.value)} value={chain}>
                 <option value="0x1">ETH</option>
                 <option value="0x89">Polygon</option>
+                <option value="0xaa36a7">sepolia</option>
             </select>
         </>
     )
