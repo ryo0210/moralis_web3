@@ -1,6 +1,7 @@
 const Moralis = require('Moralis').default
 const express = require('express')
 const cors = require('cors')
+const { response } = require('express')
 const app = express()
 const port = 8080
 require('dotenv').config()
@@ -44,3 +45,34 @@ app.get('/nativeBalance', async (req, res) => {
         res.send(e)
     }
 })
+
+app.get('/tokenBalances', async (req, res) => {
+    await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
+    try {
+        const { address, chain } = req.query;
+        const response = await Moralis.EvmApi.token.getWalletTokenBalances({
+            address: address,
+            chain: chain,
+        });
+        let tokens = response.data
+
+        let legitTokens = [];
+
+        for (let i = 0; i < tokens.length; i++) {
+            const priceResponse = await Moralis.EvmApi.token.getTokenPrice({
+                address: tokens[i].token_address,
+                chain: chain,
+            });
+            if (priceResponse.data.usdPrice > 0.01) {
+                tokens[i].usd = priceResponse.data.usdPrice;
+                legitTokens.push(tokens[i]);
+            } else {
+                console.log("💩 coin --------------");
+                console.log(priceResponse.data);
+            }
+        }
+        res.send(tokens);
+    } catch (e) {
+        res.send(e);
+    }
+});
