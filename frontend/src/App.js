@@ -3,10 +3,11 @@ import { useState } from "react"
 import WalletInputs from './components/WalletInputs';
 import NativeTokens from './components/NativeTokens';
 import Tokens from './components/Tokens';
+import PortfolioValue from './components/PortfolioValue';
 
 
 function App() {
-  const [wallet, setWallet] = useState("")
+  const [wallet, setWallet] = useState("0x0f9c198AfbF369ce45541f61f76d201c89007840")
   const [chain, setChain] = useState("0x1")
   const [nativeBalance, setNativeBalance] = useState(0);
   const [nativeValue, setNativeValue] = useState(0);
@@ -33,6 +34,10 @@ function App() {
         chain={chain}
         tokens={tokens}
         setTokens={setTokens}
+      />
+      <PortfolioValue
+        nativeValue={nativeValue}
+        tokens={tokens}
       />
     </div>
   );

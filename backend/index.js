@@ -25,6 +25,12 @@ app.get('/nativeBalance', async (req, res) => {
             chain: chain,
         });
         const nativeBalance = response.data
+
+        // balanceが無いため、テスト用のbalanceを入れる
+        if (nativeBalance.balance === '0') {
+            nativeBalance.balance = '9999999999999999999'
+        }
+
         let nativeCurrency;
 
         if (chain === "0x1") {
@@ -37,7 +43,7 @@ app.get('/nativeBalance', async (req, res) => {
             address: nativeCurrency,
             chain: chain
         });
-        console.log(nativePrice);
+
         nativeBalance.usd = nativePrice.data.usdPrice;
         res.send(nativeBalance)
 
@@ -54,15 +60,43 @@ app.get('/tokenBalances', async (req, res) => {
             address: address,
             chain: chain,
         });
-        let tokens = response.data
+
+        let tokens = response.data === [] ? response.data : [
+            {
+                "token_address": "",
+                "name": "Ether Network",
+                "symbol": "ETH",
+                "logo": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c.png",
+                "thumbnail": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c_thumb.png",
+                "decimals": 18,
+                "balance": "1234567890000000000"
+            }
+        ]
 
         let legitTokens = [];
 
         for (let i = 0; i < tokens.length; i++) {
-            const priceResponse = await Moralis.EvmApi.token.getTokenPrice({
-                address: tokens[i].token_address,
-                chain: chain,
-            });
+            var priceResponse
+            if (tokens[i].token_address === "") {
+                priceResponse = {
+                    "data": {
+                        "nativePrice": {
+                            "value": "8409770570506626",
+                            "decimals": 18,
+                            "name": "Ether",
+                            "symbol": "ETH"
+                        },
+                        "usdPrice": "19.722370676",
+                        "exchangeAddress": "0x1f98431c8ad98523631ae4a59f267346ea31f984",
+                        "exchangeName": "Uniswap v3"
+                    }
+                }
+            } else {
+                priceResponse = await Moralis.EvmApi.token.getTokenPrice({
+                    address: tokens[i].token_address,
+                    chain: chain,
+                });
+            }
             if (priceResponse.data.usdPrice > 0.01) {
                 tokens[i].usd = priceResponse.data.usdPrice;
                 legitTokens.push(tokens[i]);
@@ -71,7 +105,8 @@ app.get('/tokenBalances', async (req, res) => {
                 console.log(priceResponse.data);
             }
         }
-        res.send(tokens);
+
+        res.send(legitTokens);
     } catch (e) {
         res.send(e);
     }
