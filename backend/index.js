@@ -2,6 +2,7 @@ const Moralis = require('Moralis').default
 const express = require('express')
 const cors = require('cors')
 const { response } = require('express')
+const dar = require('./dummyApiResponse')
 const app = express()
 const port = 8080
 require('dotenv').config()
@@ -26,9 +27,11 @@ app.get('/nativeBalance', async (req, res) => {
         });
         const nativeBalance = response.data
 
+        console.log("test");
+        console.log(dar.getNativeBalance);
         // balanceが無いため、テスト用のbalanceを入れる
         if (nativeBalance.balance === '0') {
-            nativeBalance.balance = '9999999999999999999'
+            nativeBalance.balance = dar.getNativeBalance
         }
 
         let nativeCurrency;
@@ -61,36 +64,14 @@ app.get('/tokenBalances', async (req, res) => {
             chain: chain,
         });
 
-        let tokens = response.data === [] ? response.data : [
-            {
-                "token_address": "",
-                "name": "Ether Network",
-                "symbol": "ETH",
-                "logo": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c.png",
-                "thumbnail": "https://cdn.moralis.io/eth/0x67b6d479c7bb412c54e03dca8e1bc6740ce6b99c_thumb.png",
-                "decimals": 18,
-                "balance": "1234567890000000000"
-            }
-        ]
-
+        let tokens = response.data === [] ? response.data : dar.getWalletTokenBalances
+        console.log(tokens);
         let legitTokens = [];
 
         for (let i = 0; i < tokens.length; i++) {
             var priceResponse
             if (tokens[i].token_address === "") {
-                priceResponse = {
-                    "data": {
-                        "nativePrice": {
-                            "value": "8409770570506626",
-                            "decimals": 18,
-                            "name": "Ether",
-                            "symbol": "ETH"
-                        },
-                        "usdPrice": "19.722370676",
-                        "exchangeAddress": "0x1f98431c8ad98523631ae4a59f267346ea31f984",
-                        "exchangeName": "Uniswap v3"
-                    }
-                }
+                priceResponse = dar.getTokenPrice
             } else {
                 priceResponse = await Moralis.EvmApi.token.getTokenPrice({
                     address: tokens[i].token_address,
