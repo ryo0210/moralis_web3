@@ -27,8 +27,6 @@ app.get('/nativeBalance', async (req, res) => {
         });
         const nativeBalance = response.data
 
-        console.log("test");
-        console.log(dar.getNativeBalance);
         // balanceが無いため、テスト用のbalanceを入れる
         if (nativeBalance.balance === '0') {
             nativeBalance.balance = dar.getNativeBalance
@@ -88,6 +86,47 @@ app.get('/tokenBalances', async (req, res) => {
         }
 
         res.send(legitTokens);
+    } catch (e) {
+        res.send(e);
+    }
+});
+
+
+app.get('/tokenTransfers', async (req, res) => {
+    await Moralis.start({ apiKey: process.env.MORALIS_API_KEY });
+    try {
+        const { address, chain } = req.query;
+        const response = await Moralis.EvmApi.token.getWalletTokenTransfers({
+            address: address,
+            chain: chain,
+        });
+        let userTrans = response.data.result;
+
+        // ダミー
+        if (!userTrans.length) {
+            userTrans = dar.getWalletTokenTransfers
+        }
+
+        let userTransDetails = [];
+
+        for (let i = 0; i < userTrans.length; i++) {
+            const metaResponse = await Moralis.EvmApi.token.getTokenMetadata({
+                addresses: [userTrans[i].address],
+                chain: chain,
+            });
+            if (metaResponse.data[0].address === '0x057ec652a4f150f7ff94f089a38008f49a0df88e') {
+                metaResponse.data = dar.getTokenMetadata
+            }
+
+            if (metaResponse.data) {
+                userTrans[i].decimals = metaResponse.data[0].decimals;
+                userTrans[i].symbol = metaResponse.data[0].symbol;
+                userTransDetails.push(userTrans[i]);
+            } else {
+                console.log("no details for coin");
+            }
+        }
+        res.send(userTransDetails);
     } catch (e) {
         res.send(e);
     }
