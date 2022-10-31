@@ -46,5 +46,30 @@ module.exports = {
             "block_number": "string",
             "validated": "string"
         }
-    ]
+    ],
+    getWalletNFTs: {
+        "status": "SYNCING",
+        "total": "2000",
+        "page": "2",
+        "page_size": "100",
+        "cursor": "string",
+        "result": [
+            {
+                "token_address": "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
+                "token_id": "15",
+                "contract_type": "ERC721",
+                "owner_of": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+                "block_number": "88256",
+                "block_number_minted": "88256",
+                "token_uri": "string",
+                "metadata": "string",
+                "amount": "1",
+                "name": "CryptoKitties",
+                "symbol": "RARI",
+                "token_hash": "502cee781b0fb40ea02508b21d319ced",
+                "last_token_uri_sync": "2021-02-24T00:47:26.647Z",
+                "last_metadata_sync": "2021-02-24T00:47:26.647Z"
+            }
+        ]
+    }
 }
