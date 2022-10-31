@@ -11,8 +11,6 @@ function PortfolioValue({ nativeValue, tokens }) {
             val = val + Number(tokens[i].val);
         }
         val += Number(nativeValue);
-        console.log("val:", val);
-        console.log(val.toFixed(2));
         setTotalValue(val.toFixed(2));
     }, [nativeValue, tokens])
     return (

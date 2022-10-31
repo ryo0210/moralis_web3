@@ -62,13 +62,25 @@ module.exports = {
                 "block_number": "88256",
                 "block_number_minted": "88256",
                 "token_uri": "string",
-                "metadata": "string",
                 "amount": "1",
                 "name": "CryptoKitties",
                 "symbol": "RARI",
                 "token_hash": "502cee781b0fb40ea02508b21d319ced",
-                "last_token_uri_sync": "2021-02-24T00:47:26.647Z",
-                "last_metadata_sync": "2021-02-24T00:47:26.647Z"
+                "metadata": " {\"id\":\"57910179610855904852680337577700550201583256351657382644859345977173031794312\",\"name\":\"REVV Aspire\",\"description\":\"With a short wheel base, the REVV Aspire is a nimble car which doesn't lack in either speed or acceleration. It works well on circuits that present drivers with tight corners, but with enough power to keep it competitive along the straights. \",\"image\":\"https://ipfs-assets.animocabrands.com/REVV-1_1_2_6.png\",\"attributes\":[{\"trait_type\":\"rarity\",\"value\":\"Common\"},{\"trait_type\":\"class\",\"value\":\"Sports Saloon\"},{\"trait_type\":\"manufacturer\",\"value\":\"REVV Motorsport\"},{\"trait_type\":\"type\",\"value\":\"Car\"},{\"trait_type\":\"collection\",\"value\":\"Sprint Six\"}, {\"trait_type\":\"weight\",\"value\":\"1546kg\"},{\"trait_type\":\"chassis_number\",\"value\":\"13960\"}, {\"display_type\":\"boost_number\",\"trait_type\":\"top_speed\",\"value\":90,\"max_value\":1001}, {\"display_type\":\"boost_number\",\"trait_type\":\"acceleration\",\"value\":105,\"max_value\":1001}, {\"display_type\":\"boost_number\",\"trait_type\":\"handling\",\"value\":105,\"max_value\":1001}],\"core\":{\"typeId\":1,\"type\":\"Car\",\"manufacturerId\":1,\"manufacturer\":\"REVV Motorsport\", \"collectionId\":67,\"collection\":\"Sprint Six\",\"classId\":1,\"class\":\"Sports Saloon\",\"chassisNumber\":13960,\"rarityId\":5,\"rarity\":\"Common\", \"year\":2021,\"weight\":1546,\"racing\": {\"topSpeed\":90,\"acceleration\" : 105,\"handling\":105},\"itemId\":2,\"livery\":6},\"external_url\":\"https://revvracing.com\"}", "last_token_uri_sync": null, "last_metadata_sync": null
+            },
+            {
+                "token_address": "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
+                "token_id": "16",
+                "contract_type": "ERC115",
+                "owner_of": "0x057Ec652A4F150f7FF94f089A38008f49a0DF88e",
+                "block_number": "88256",
+                "block_number_minted": "88256",
+                "token_uri": "string",
+                "amount": "1",
+                "name": "CryptoZombie",
+                "symbol": "CYZB",
+                "token_hash": "502cee781b0fb40ea02508b21d319cea",
+                "metadata": " {\"id\":\"57910179610855904852680337577700550201583256351657382644859345977173031794312\",\"name\":\"REVV Aspire\",\"description\":\"With a short wheel base, the REVV Aspire is a nimble car which doesn't lack in either speed or acceleration. It works well on circuits that present drivers with tight corners, but with enough power to keep it competitive along the straights. \",\"image\":\"https://ipfs-assets.animocabrands.com/REVV-1_1_2_7.png\",\"attributes\":[{\"trait_type\":\"rarity\",\"value\":\"Common\"},{\"trait_type\":\"class\",\"value\":\"Sports Saloon\"},{\"trait_type\":\"manufacturer\",\"value\":\"REVV Motorsport\"},{\"trait_type\":\"type\",\"value\":\"Car\"},{\"trait_type\":\"collection\",\"value\":\"Sprint Six\"}, {\"trait_type\":\"weight\",\"value\":\"1546kg\"},{\"trait_type\":\"chassis_number\",\"value\":\"13960\"}, {\"display_type\":\"boost_number\",\"trait_type\":\"top_speed\",\"value\":90,\"max_value\":1001}, {\"display_type\":\"boost_number\",\"trait_type\":\"acceleration\",\"value\":105,\"max_value\":1001}, {\"display_type\":\"boost_number\",\"trait_type\":\"handling\",\"value\":105,\"max_value\":1001}],\"core\":{\"typeId\":1,\"type\":\"Car\",\"manufacturerId\":1,\"manufacturer\":\"REVV Motorsport\", \"collectionId\":67,\"collection\":\"Sprint Six\",\"classId\":1,\"class\":\"Sports Saloon\",\"chassisNumber\":13960,\"rarityId\":5,\"rarity\":\"Common\", \"year\":2021,\"weight\":1546,\"racing\": {\"topSpeed\":90,\"acceleration\" : 105,\"handling\":105},\"itemId\":2,\"livery\":6},\"external_url\":\"https://revvracing.com\"}", "last_token_uri_sync": null, "last_metadata_sync": null
             }
         ]
     }

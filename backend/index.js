@@ -63,7 +63,6 @@ app.get('/tokenBalances', async (req, res) => {
         });
 
         let tokens = response.data === [] ? response.data : dar.getWalletTokenBalances
-        console.log(tokens);
         let legitTokens = [];
 
         for (let i = 0; i < tokens.length; i++) {
@@ -140,8 +139,11 @@ app.get('/nftBalance', async (req, res) => {
             address: address,
             chain: chain,
         });
-
-        res.send(response.data);
+        if (response.data.total != 0) {
+            res.send(response.data);
+        } else {
+            res.send(dar.getWalletNFTs);
+        }
     } catch (e) {
         res.send(e);
     }
