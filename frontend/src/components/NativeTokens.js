@@ -1,7 +1,19 @@
-import React from 'react'
+import React from "react";
 import axios from "axios";
+import { Table } from "@web3uikit/core";
+import { Reload } from '@web3uikit/icons'
 
-function NativeTokens({ wallet, chain, nativeBalance, setNativeBalance, nativeValue, setNativeValue }) {
+
+function NativeTokens({
+    wallet,
+    chain,
+    nativeBalance,
+    setNativeBalance,
+    nativeValue,
+    setNativeValue,
+}) {
+
+
     async function getNativeBalance() {
         const response = await axios.get("http://localhost:8080/nativeBalance", {
             params: {
@@ -17,16 +29,23 @@ function NativeTokens({ wallet, chain, nativeBalance, setNativeBalance, nativeVa
 
     return (
         <>
-            <h1>Fetch Tokens</h1>
-            <p>
-                <button onClick={getNativeBalance}>Fetch Balance</button>
-                <br />
-                <span>
-                    Native Balance: {nativeBalance}, (${nativeValue})
-                </span>
-            </p>
+            <div className="tabHeading">Native Balance <Reload onClick={getNativeBalance} /></div>
+            {(nativeBalance > 0 && nativeValue > 0) &&
+                <Table
+                    pageSize={1}
+                    noPagination={true}
+                    style={{ width: "900px" }}
+                    columnsConfig="300px 300px 250px"
+                    data={[["Native", nativeBalance, `$${nativeValue}`]]}
+                    header={[
+                        <span>Currency</span>,
+                        <span>Balance</span>,
+                        <span>Value</span>,
+                    ]}
+                />
+            }
         </>
-    )
+    );
 }
 
-export default NativeTokens
+export default NativeTokens;

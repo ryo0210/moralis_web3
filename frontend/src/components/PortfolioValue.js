@@ -1,8 +1,8 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import React from "react";
+import { useState, useEffect } from "react";
+import "../App.css";
 
-
-function PortfolioValue({ nativeValue, tokens }) {
+function PortfolioValue({ tokens, nativeValue }) {
     const [totalValue, setTotalValue] = useState(0);
 
     useEffect(() => {
@@ -10,17 +10,21 @@ function PortfolioValue({ nativeValue, tokens }) {
         for (let i = 0; i < tokens.length; i++) {
             val = val + Number(tokens[i].val);
         }
-        val += Number(nativeValue);
+        val = val + Number(nativeValue);
+
         setTotalValue(val.toFixed(2));
-    }, [nativeValue, tokens])
+    }, [nativeValue, tokens]);
+
     return (
         <>
-            <h1>Portfolio Total Value</h1>
-            <p>
-                <span>Total Balance: ${totalValue}</span>
-            </p>
+            <div className="totalValue">
+                <h3>Portfolio Total Value</h3>
+                <h2>
+                    ${totalValue}
+                </h2>
+            </div>
         </>
-    )
+    );
 }
 
-export default PortfolioValue
+export default PortfolioValue;
